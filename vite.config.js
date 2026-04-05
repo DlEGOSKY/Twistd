@@ -1,13 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+// === vite.config.js ===
+// Configuración de Vite con plugin React para JSX transform
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 
 export default defineConfig({
-  base: "/Dominix/",
   plugins: [react()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
+  server: {
+    port: 3000,
+    open: true
   },
-});
+  build: {
+    outDir: 'dist',
+    sourcemap: false
+  }
+})
