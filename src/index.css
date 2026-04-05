@@ -1,0 +1,107 @@
+/* === src/index.css === */
+/* Estilos base con Tailwind y reset personalizado para el juego */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Reset y estilos base */
+@layer base {
+  html {
+    /* Prevenir scroll horizontal en dispositivos moviles */
+    overflow-x: hidden;
+    /* Suavizar scroll */
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* Fondo base del skin Pergamino */
+    @apply bg-historia-bg text-historia-text;
+    /* Tipografia base */
+    @apply font-serif antialiased;
+    /* Prevenir seleccion accidental durante el juego */
+    -webkit-tap-highlight-color: transparent;
+    /* Altura completa para pantallas de transicion */
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  /* Estilos de seleccion de texto */
+  ::selection {
+    @apply bg-historia-accent text-historia-surface;
+  }
+
+  /* Scrollbar personalizado para navegadores webkit */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-historia-bg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-historia-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-historia-muted;
+  }
+}
+
+/* Componentes reutilizables */
+@layer components {
+  /* Contenedor principal de pantalla */
+  .screen-container {
+    @apply min-h-screen min-h-[100dvh] w-full px-4 py-6;
+    @apply flex flex-col;
+  }
+
+  /* Tarjeta de superficie elevada */
+  .card {
+    @apply bg-historia-surface border border-historia-border;
+    @apply rounded-lg p-4 shadow-sm;
+  }
+
+  /* Efecto de papel con textura sutil */
+  .paper-texture {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  /* Cursor parpadeante para efecto maquina de escribir */
+  .typewriter-cursor::after {
+    content: '|';
+    @apply animate-cursor-blink text-historia-accent ml-0.5;
+  }
+}
+
+/* Utilidades personalizadas */
+@layer utilities {
+  /* Ocultar visualmente pero mantener accesible */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Transicion suave para cambios de skin */
+  .skin-transition {
+    @apply transition-colors duration-300 ease-in-out;
+  }
+
+  /* Sombra de texto para legibilidad sobre fondos variables */
+  .text-shadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Efecto de tinta para texto de jugadores */
+  .ink-effect {
+    text-shadow: 0 0 1px currentColor;
+  }
+}
